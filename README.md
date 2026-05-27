@@ -1,87 +1,74 @@
 # Ethical Hacking - Information Gathering Course
 
-## 🎯 Course Overview
-This comprehensive course covers various **ethical hacking information gathering techniques** used in cybersecurity, penetration testing, and bug bounty hunting.
+## Course Overview
 
-## ⚠️ **IMPORTANT DISCLAIMER**
-**This course is for EDUCATIONAL purposes only!**
-- ✅ Only use these techniques on systems you **OWN** or have **EXPLICIT WRITTEN PERMISSION** to test
-- ✅ Use in controlled lab environments for learning
-- ✅ Use for authorized penetration testing engagements
-- ❌ **NEVER** use against systems without permission - this is **ILLEGAL**
+This course covers ethical hacking information-gathering techniques used in cybersecurity, penetration testing, and bug bounty learning.
 
-## 📚 Course Structure
+## Important Disclaimer
 
-### 📁 Project Structure
-```
+This course is for educational purposes and authorized testing only.
+
+- Only use these techniques on systems you own or have explicit written permission to test.
+- Practice in controlled lab environments whenever possible.
+- Keep scans within the written scope of an authorized engagement.
+- Never use these techniques against systems without permission.
+
+## Project Structure
+
+```text
 EthicalHacking_InfoGathering/
-├── lessons/          # Step-by-step lesson files
-├── scripts/          # Individual technique scripts
-├── tools/            # Main comprehensive tool
-├── examples/         # Example outputs and usage
-├── docs/             # Additional documentation
-└── README.md         # This file
+├── docs/                  # Additional documentation
+├── tools/                 # Python tools and report generator
+├── README.md              # Project overview
+├── requirements.txt       # Python dependencies
+└── view_techniques.bat    # Windows helper launcher
 ```
 
-### 🔍 Information Gathering Methods Covered
+## Tools
 
-#### 1. **Passive Information Gathering**
-- OSINT (Open Source Intelligence)
-- DNS Enumeration
-- WHOIS Lookup
-- Search Engine Reconnaissance
-- Social Engineering Research
-- Metadata Analysis
-- Cached Content Analysis
+- `tools/infogather_pro.py` - Main information-gathering scanner.
+- `tools/info_viewer.py` - Terminal reference viewer for techniques.
+- `tools/pdf_generator.py` - PDF reference generator.
 
-#### 2. **Active Information Gathering**
-- Network Scanning
-- Service Enumeration
-- Web Application Scanning
-- DNS Zone Transfer
-- Email Harvesting
-- Subdomain Brute-forcing
+## Getting Started
 
-#### 3. **Network-Based Gathering**
-- Ping Sweeps
-- Port Scanning
-- OS Fingerprinting
-- Service Detection
-- Traceroute Analysis
+1. Install Python 3.7 or newer.
+2. Install dependencies:
 
-#### 4. **Web-Based Gathering**
-- Directory/File Enumeration
-- Technology Stack Detection
-- SSL/TLS Certificate Analysis
-- Robots.txt Analysis
-- Sitemap Analysis
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 🛠️ Main Tool: InfoGather Pro
-Our comprehensive Python tool that combines all information gathering techniques into one powerful script.
+3. View available techniques:
 
-## 🚀 Getting Started
-1. Install Python 3.7+
-2. Install required dependencies: `pip install -r requirements.txt`
-3. Start with `lessons/01_introduction.md`
-4. Practice with the main tool: `python tools/infogather_pro.py`
+   ```bash
+   python tools/info_viewer.py
+   ```
 
-## 📖 Learning Path
-1. **Introduction to Information Gathering**
-2. **Passive Reconnaissance Techniques**
-3. **Active Reconnaissance Techniques**
-4. **Network-Based Information Gathering**
-5. **Web-Based Information Gathering**
-6. **Combining Techniques for Maximum Effect**
-7. **Legal and Ethical Considerations**
+4. Run an authorized passive scan:
 
-## 🎓 Prerequisites
-- Basic understanding of networking concepts
-- Python programming basics
-- Command line familiarity
-- Understanding of cybersecurity fundamentals
+   ```bash
+   python tools/infogather_pro.py example.com --passive --yes
+   ```
 
-## 📝 Legal Notice
-This course is designed for cybersecurity professionals, students, and enthusiasts who want to learn ethical hacking techniques for defensive purposes. Always ensure you have proper authorization before conducting any security testing.
+5. Generate the PDF reference:
 
----
-**Remember: With great power comes great responsibility!**
+   ```bash
+   python tools/pdf_generator.py
+   ```
+
+## Notes
+
+- The scanner prompts for authorization by default. Use `--yes` only when you already have permission to test the target.
+- `python-nmap` requires Nmap to be installed on the system for port scanning.
+- Generated scan JSON files and the default PDF report are ignored by git.
+
+## Learning Path
+
+1. Introduction to information gathering.
+2. Passive reconnaissance techniques.
+3. Active reconnaissance techniques.
+4. Network-based information gathering.
+5. Web-based information gathering.
+6. Combining techniques for useful reporting.
+7. Legal and ethical considerations.

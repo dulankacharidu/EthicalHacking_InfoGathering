@@ -13,6 +13,9 @@ import sys
 import argparse
 from colorama import Fore, Back, Style, init
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 # Initialize colorama for Windows compatibility
 init(autoreset=True)
 
@@ -114,7 +117,7 @@ class InfoViewer:
             else:
                 status_color = Fore.YELLOW
                 
-            print(f"{Fore.CYAN}│{Fore.YELLOW} {tech_id} {Fore.CYAN}│{Fore.WHITE} {name} {Fore.CYAN}│{Fore.LIGHTBLUE} {tools} {Fore.CYAN}│{status_color} {status}  {Fore.CYAN}│{Style.RESET_ALL}")
+            print(f"{Fore.CYAN}│{Fore.YELLOW} {tech_id} {Fore.CYAN}│{Fore.WHITE} {name} {Fore.CYAN}│{Fore.LIGHTBLUE_EX} {tools} {Fore.CYAN}│{status_color} {status}  {Fore.CYAN}│{Style.RESET_ALL}")
         
         print(f"{Fore.CYAN}└─────┴─────────────────────────────┴──────────────────────────┴────────┘{Style.RESET_ALL}")
 
@@ -141,7 +144,7 @@ class InfoViewer:
         for category, tools in self.popular_tools.items():
             print(f"\n{Fore.CYAN}🔹 {Fore.YELLOW}{category}:")
             for i, tool in enumerate(tools, 1):
-                print(f"{Fore.WHITE}   {i}. {Fore.LIGHTGREEN}{tool}")
+                print(f"{Fore.WHITE}   {i}. {Fore.LIGHTGREEN_EX}{tool}")
 
     def print_quick_commands(self):
         """Print quick command examples"""
@@ -165,7 +168,7 @@ class InfoViewer:
         for technique, command in commands:
             tech_name = technique[:27].ljust(27)
             cmd = command[:36].ljust(36)
-            print(f"{Fore.CYAN}│{Fore.YELLOW} {tech_name} {Fore.CYAN}│{Fore.LIGHTGREEN} {cmd} {Fore.CYAN}│{Style.RESET_ALL}")
+            print(f"{Fore.CYAN}│{Fore.YELLOW} {tech_name} {Fore.CYAN}│{Fore.LIGHTGREEN_EX} {cmd} {Fore.CYAN}│{Style.RESET_ALL}")
         
         print(f"{Fore.CYAN}└─────────────────────────────┴──────────────────────────────────────┘{Style.RESET_ALL}")
 
@@ -184,7 +187,7 @@ class InfoViewer:
         
         print(f"\n{Fore.WHITE}Command Line Options:")
         for description, command in usage_info:
-            print(f"{Fore.CYAN}  • {Fore.YELLOW}{description}: {Fore.LIGHTGREEN}{command}")
+            print(f"{Fore.CYAN}  • {Fore.YELLOW}{description}: {Fore.LIGHTGREEN_EX}{command}")
 
     def show_technique_details(self, tech_id):
         """Show detailed information about a specific technique"""
@@ -212,7 +215,7 @@ class InfoViewer:
                     if 'examples' in details:
                         print(f"\n{Fore.CYAN}Examples:")
                         for example in details['examples']:
-                            print(f"{Fore.LIGHTGREEN}  • {example}")
+                            print(f"{Fore.LIGHTGREEN_EX}  • {example}")
                 
                 break
         
@@ -268,6 +271,21 @@ class InfoViewer:
         self.print_section_header(f"{category.upper()} TECHNIQUES", Fore.CYAN)
         self.print_technique_table(category, self.techniques[category])
 
+    def display_implemented(self):
+        """Display only implemented techniques"""
+        self.print_banner()
+        self.print_section_header("IMPLEMENTED TECHNIQUES", Fore.GREEN)
+
+        for category, techniques in self.techniques.items():
+            implemented = {
+                tech_id: details
+                for tech_id, details in techniques.items()
+                if details['status'] == '✅'
+            }
+            if implemented:
+                self.print_section_header(f"{category.upper()} TECHNIQUES", Fore.CYAN)
+                self.print_technique_table(category, implemented)
+
     def save_to_file(self, filename):
         """Save output to file"""
         # Redirect stdout to file
@@ -296,6 +314,8 @@ def main():
     
     if args.technique:
         viewer.show_technique_details(args.technique.upper())
+    elif args.implemented:
+        viewer.display_implemented()
     elif args.category:
         viewer.display_category(args.category)
     elif args.output:

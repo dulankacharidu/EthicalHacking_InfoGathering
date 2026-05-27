@@ -14,9 +14,6 @@ Only use on systems you own or have explicit written permission to test.
 import socket
 import subprocess
 import requests
-import dns.resolver
-import whois
-import nmap
 import ssl
 import threading
 import json
@@ -28,6 +25,27 @@ from datetime import datetime
 from urllib.parse import urljoin, urlparse
 from concurrent.futures import ThreadPoolExecutor
 import os
+import urllib3
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+try:
+    import dns.resolver
+except ImportError:
+    dns = None
+
+try:
+    import whois
+except ImportError:
+    whois = None
+
+try:
+    import nmap
+except ImportError:
+    nmap = None
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class InfoGatherPro:
     def __init__(self):
@@ -57,7 +75,8 @@ class InfoGatherPro:
     def save_results(self, filename=None):
         """Save results to JSON file"""
         if not filename:
-            filename = f"infogather_{self.target.replace('.', '_')}_{int(time.time())}.json"
+            safe_target = (self.target or "scan_results").replace('.', '_')
+            filename = f"infogather_{safe_target}_{int(time.time())}.json"
         
         with open(filename, 'w') as f:
             json.dump(self.results, f, indent=2, default=str)
@@ -71,6 +90,11 @@ class InfoGatherPro:
     def whois_lookup(self, domain):
         """WHOIS information gathering"""
         self.log(f"Performing WHOIS lookup for {domain}")
+        if whois is None:
+            self.log("python-whois is not installed. Skipping WHOIS lookup.", "WARNING")
+            self.results['whois'] = {'error': 'python-whois is not installed'}
+            return None
+
         try:
             w = whois.whois(domain)
             whois_data = {
@@ -92,6 +116,11 @@ class InfoGatherPro:
         """DNS enumeration and subdomain discovery"""
         self.log(f"Performing DNS enumeration for {domain}")
         dns_results = {}
+
+        if dns is None:
+            self.log("dnspython is not installed. Skipping DNS record lookup.", "WARNING")
+            self.results['dns'] = {'error': 'dnspython is not installed'}
+            return dns_results
         
         # Common DNS record types
         record_types = ['A', 'AAAA', 'MX', 'NS', 'TXT', 'CNAME', 'SOA']
@@ -153,6 +182,15 @@ class InfoGatherPro:
     def port_scan(self, target, port_range="1-1000"):
         """TCP port scanning"""
         self.log(f"Scanning ports {port_range} on {target}")
+
+        if nmap is None:
+            self.log("python-nmap is not installed. Skipping port scan.", "WARNING")
+            self.results['port_scan'] = {
+                'target': target,
+                'open_ports': [],
+                'error': 'python-nmap is not installed'
+            }
+            return []
         
         nm = nmap.PortScanner()
         try:
@@ -317,6 +355,9 @@ class InfoGatherPro:
     
     def run_passive_scan(self, target):
         """Run all passive information gathering techniques"""
+        self.target = target
+        self.results['target'] = target
+        self.results['scan_start_time'] = str(datetime.now())
         self.log("Starting passive information gathering...")
         
         # WHOIS lookup
@@ -330,9 +371,13 @@ class InfoGatherPro:
         
         # Email harvesting
         self.email_harvesting(target)
+        self.results['scan_end_time'] = str(datetime.now())
     
     def run_active_scan(self, target):
         """Run all active information gathering techniques"""
+        self.target = target
+        self.results['target'] = target
+        self.results['scan_start_time'] = str(datetime.now())
         self.log("Starting active information gathering...")
         
         # Resolve domain to IP
@@ -358,6 +403,7 @@ class InfoGatherPro:
                     break
             except:
                 continue
+        self.results['scan_end_time'] = str(datetime.now())
     
     def run_full_scan(self, target):
         """Run complete information gathering scan"""
@@ -367,11 +413,32 @@ class InfoGatherPro:
         
         self.log(f"Starting comprehensive scan of {target}")
         
-        # Run passive techniques first
-        self.run_passive_scan(target)
-        
-        # Run active techniques
-        self.run_active_scan(target)
+        self.log("Starting passive information gathering...")
+        self.whois_lookup(target)
+        self.dns_enumeration(target)
+        self.ssl_certificate_info(target)
+        self.email_harvesting(target)
+
+        self.log("Starting active information gathering...")
+        try:
+            ip_address = socket.gethostbyname(target)
+            self.log(f"Resolved {target} to {ip_address}")
+        except:
+            ip_address = target
+
+        self.port_scan(ip_address)
+
+        for protocol in ['http', 'https']:
+            self.web_technology_detection(f"{protocol}://{target}")
+
+        for protocol in ['http', 'https']:
+            try:
+                response = requests.get(f"{protocol}://{target}", timeout=5)
+                if response.status_code == 200:
+                    self.directory_enumeration(f"{protocol}://{target}")
+                    break
+            except:
+                continue
         
         self.results['scan_end_time'] = str(datetime.now())
         self.log("Scan completed!")
@@ -409,6 +476,8 @@ def main():
     parser.add_argument("-a", "--active", action="store_true", help="Run only active techniques")
     parser.add_argument("-o", "--output", help="Output file for results (JSON)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose output")
+    parser.add_argument("--yes", action="store_true",
+                       help="Confirm you are authorized to test the target")
     
     args = parser.parse_args()
     
@@ -423,7 +492,7 @@ def main():
     print("\n⚠️  LEGAL WARNING:")
     print("This tool should only be used on systems you own or have explicit permission to test.")
     print("Unauthorized access to computer systems is illegal in most jurisdictions.")
-    response = input("\nDo you have authorization to test this target? (yes/no): ")
+    response = "yes" if args.yes else input("\nDo you have authorization to test this target? (yes/no): ")
     
     if response.lower() not in ['yes', 'y']:
         print("Exiting. Only use this tool on authorized targets.")

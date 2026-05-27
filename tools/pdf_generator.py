@@ -20,6 +20,9 @@ from reportlab.lib import colors
 from reportlab.pdfgen import canvas
 import argparse
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 class PDFGenerator:
     def __init__(self):
         self.techniques = {
@@ -257,7 +260,7 @@ class PDFGenerator:
         table_data = [['ID', 'Technique Name', 'Tools Used', 'Status', 'Description']]
         
         for tech_id, details in techniques.items():
-            status_symbol = details['status']
+            status_symbol = "Implemented" if details['status'] == '✅' else "Planned"
             table_data.append([
                 tech_id,
                 details['name'],

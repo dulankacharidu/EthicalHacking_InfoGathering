@@ -12,3 +12,5 @@ env/
 Thumbs.db
 
 *.log
+infogather_*.json
+information_gathering_reference.pdf
