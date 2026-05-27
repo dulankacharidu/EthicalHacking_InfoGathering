@@ -1,0 +1,187 @@
+================================================================================
+                    INFORMATION GATHERING TECHNIQUES SUMMARY
+                      Comprehensive Ethical Hacking Reference
+================================================================================
+
+⚠️  IMPORTANT LEGAL DISCLAIMER ⚠️
+This is for EDUCATIONAL PURPOSES ONLY!
+Only use on systems you OWN or have EXPLICIT WRITTEN PERMISSION to test!
+
+================================================================================
+QUICK REFERENCE INDEX
+================================================================================
+
+PASSIVE TECHNIQUES (6/10 implemented ✅)
+┌─────┬─────────────────────────────┬──────────────────────────┬────────┐
+│ ID  │ Technique Name              │ Tools Used               │ Status │
+├─────┼─────────────────────────────┼──────────────────────────┼────────┤
+│ P01 │ WHOIS Lookup                │ whois, python-whois      │   ✅   │
+│ P02 │ DNS Enumeration             │ dnspython, socket        │   ✅   │
+│ P03 │ Subdomain Discovery         │ Custom wordlist, DNS     │   ✅   │
+│ P04 │ SSL Certificate Analysis    │ ssl, socket              │   ✅   │
+│ P05 │ Google Dorking              │ requests, custom queries │   ✅   │
+│ P06 │ Email Harvesting            │ requests, regex          │   ✅   │
+│ P07 │ Metadata Extraction         │ exifread, PyPDF2         │   ⏳   │
+│ P08 │ Social Media Intel          │ APIs, web scraping       │   ⏳   │
+│ P09 │ Archive Analysis            │ Wayback Machine API      │   ⏳   │
+│ P10 │ Code Repository Search      │ GitHub API               │   ⏳   │
+└─────┴─────────────────────────────┴──────────────────────────┴────────┘
+
+ACTIVE TECHNIQUES (5/10 implemented ✅)
+┌─────┬─────────────────────────────┬──────────────────────────┬────────┐
+│ ID  │ Technique Name              │ Tools Used               │ Status │
+├─────┼─────────────────────────────┼──────────────────────────┼────────┤
+│ A01 │ Port Scanning               │ python-nmap              │   ✅   │
+│ A02 │ Service Detection           │ nmap, custom banners     │   ✅   │
+│ A03 │ OS Fingerprinting           │ nmap NSE scripts         │   ✅   │
+│ A04 │ Web Technology Detection    │ requests, headers        │   ✅   │
+│ A05 │ Directory Enumeration       │ requests, threading      │   ✅   │
+│ A06 │ Parameter Discovery         │ custom fuzzing           │   ⏳   │
+│ A07 │ Database Fingerprinting     │ Custom probes            │   ⏳   │
+│ A08 │ API Discovery               │ requests, pattern match  │   ⏳   │
+│ A09 │ Network Mapping             │ traceroute, ping         │   ⏳   │
+│ A10 │ Vulnerability Scanning      │ Custom checks            │   ⏳   │
+└─────┴─────────────────────────────┴──────────────────────────┴────────┘
+
+WEB-BASED TECHNIQUES (6/10 implemented ✅)
+┌─────┬─────────────────────────────┬──────────────────────────┬────────┐
+│ ID  │ Technique Name              │ Tools Used               │ Status │
+├─────┼─────────────────────────────┼──────────────────────────┼────────┤
+│ W01 │ Robots.txt Analysis         │ requests                 │   ✅   │
+│ W02 │ Sitemap Analysis            │ requests, XML parsing    │   ✅   │
+│ W03 │ Source Code Analysis        │ BeautifulSoup, regex     │   ✅   │
+│ W04 │ Cookie Analysis             │ requests.cookies         │   ✅   │
+│ W05 │ Header Analysis             │ requests.headers         │   ✅   │
+│ W06 │ Form Discovery              │ BeautifulSoup            │   ⏳   │
+│ W07 │ JavaScript Analysis         │ regex, ast parsing       │   ⏳   │
+│ W08 │ Error Page Analysis         │ Custom requests          │   ⏳   │
+│ W09 │ CDN Detection               │ DNS, headers             │   ⏳   │
+│ W10 │ CMS Detection               │ signatures, patterns     │   ✅   │
+└─────┴─────────────────────────────┴──────────────────────────┴────────┘
+
+SPECIALIZED TECHNIQUES (4/10 implemented ✅)
+┌─────┬─────────────────────────────┬──────────────────────────┬────────┐
+│ ID  │ Technique Name              │ Tools Used               │ Status │
+├─────┼─────────────────────────────┼──────────────────────────┼────────┤
+│ S01 │ Cloud Storage Discovery     │ boto3, custom enum       │   ⏳   │
+│ S02 │ GraphQL Introspection       │ requests, GraphQL        │   ⏳   │
+│ S03 │ API Documentation           │ requests, OpenAPI        │   ⏳   │
+│ S04 │ Certificate Transparency    │ CT logs API              │   ⏳   │
+│ S05 │ Shodan Integration          │ Shodan API               │   ⏳   │
+│ S06 │ Threat Intelligence         │ Various APIs             │   ⏳   │
+│ S07 │ Geolocation Analysis        │ IP geolocation APIs      │   ✅   │
+│ S08 │ Network Range Discovery     │ whois, CIDR              │   ⏳   │
+│ S09 │ Email Format Discovery      │ pattern analysis         │   ✅   │
+│ S10 │ Technology Versioning       │ banner analysis          │   ✅   │
+└─────┴─────────────────────────────┴──────────────────────────┴────────┘
+
+================================================================================
+IMPLEMENTATION STATISTICS
+================================================================================
+📊 Total Techniques: 40
+✅ Implemented: 20 (50%)
+⏳ In Progress: 20 (50%)
+
+• Passive: 6/10 (60%)
+• Active: 5/10 (50%)
+• Web-Based: 6/10 (60%)
+• Specialized: 4/10 (40%)
+
+================================================================================
+POPULAR TOOLS BY CATEGORY
+================================================================================
+
+🔹 Reconnaissance:
+   1. Nmap
+   2. theHarvester
+   3. Maltego
+   4. Recon-ng
+   5. SpiderFoot
+
+🔹 DNS Analysis:
+   1. dig
+   2. nslookup
+   3. dnsrecon
+   4. fierce
+   5. sublist3r
+   6. amass
+
+🔹 Web Scanning:
+   1. dirb
+   2. gobuster
+   3. wfuzz
+   4. Burp Suite
+   5. OWASP ZAP
+
+🔹 OSINT:
+   1. Shodan
+   2. Censys
+   3. Google Dorking
+   4. Social-Engineer Toolkit
+
+🔹 Network Mapping:
+   1. Nmap
+   2. Masscan
+   3. Zmap
+   4. Hping3
+   5. Unicornscan
+
+================================================================================
+QUICK COMMAND EXAMPLES
+================================================================================
+
+┌─────────────────────────────┬──────────────────────────────────────┐
+│ Technique                   │ Command Example                      │
+├─────────────────────────────┼──────────────────────────────────────┤
+│ Basic WHOIS Lookup          │ whois example.com                    │
+│ DNS Enumeration             │ dig example.com ANY                  │
+│ Subdomain Discovery         │ nslookup -type=NS example.com        │
+│ Port Scan (Top 1000)        │ nmap -T4 -F example.com              │
+│ Web Technology Detection    │ curl -I https://example.com          │
+│ Directory Enumeration       │ dirb https://example.com             │
+│ SSL Certificate Info        │ openssl s_client -connect example.   │
+│ Email Harvesting            │ theharvester -d example.com -b google│
+└─────────────────────────────┴──────────────────────────────────────┘
+
+================================================================================
+USAGE GUIDE
+================================================================================
+
+Command Line Options:
+  • View all techniques: python tools/info_viewer.py
+  • View specific category: python tools/info_viewer.py -c passive
+  • View technique details: python tools/info_viewer.py -t P01
+  • Show only implemented: python tools/info_viewer.py --implemented
+  • Export to file: python tools/info_viewer.py -o techniques.txt
+  • Generate PDF report: python tools/pdf_generator.py
+
+================================================================================
+INSTALLATION INSTRUCTIONS
+================================================================================
+
+1. Install Python 3.7+ from https://python.org
+2. Install dependencies:
+   pip install -r requirements.txt
+3. Run the tools:
+   python tools/info_viewer.py
+   python tools/pdf_generator.py
+
+================================================================================
+LEGAL CONSIDERATIONS
+================================================================================
+
+⚠️  ALWAYS REMEMBER:
+
+1. Authorization Required: Written permission mandatory
+2. Scope Limitations: Stay within authorized boundaries  
+3. Data Handling: Secure storage and disposal
+4. Disclosure Process: Responsible vulnerability disclosure
+5. Legal Compliance: Local and international laws
+6. Professional Ethics: Cybersecurity professional standards
+
+Only use these techniques on systems you own or have explicit written 
+permission to test. Unauthorized access is ILLEGAL!
+
+================================================================================
+Generated: 2025-09-19 | Ethical Hacking Course | Educational Use Only
+================================================================================

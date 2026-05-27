@@ -1,0 +1,27 @@
+# Core requirements for InfoGather Pro
+requests>=2.25.1
+dnspython>=2.1.0
+python-whois>=0.7.3
+python-nmap>=0.6.4
+beautifulsoup4>=4.9.3
+colorama>=0.4.4
+
+# PDF Generation
+reportlab>=3.5.0
+
+# Optional enhanced features (install separately if needed)
+# shodan>=1.25.0
+# exifread>=2.3.2
+# PyPDF2>=2.0.0
+# boto3>=1.17.0
+# selenium>=3.141.0
+
+# Web scraping and analysis
+lxml>=4.6.0
+urllib3>=1.26.0
+
+# Additional utilities
+tqdm>=4.60.0
+argparse
+json
+xml
