@@ -13,4 +13,5 @@ Thumbs.db
 
 *.log
 infogather_*.json
+reports/
 information_gathering_reference.pdf

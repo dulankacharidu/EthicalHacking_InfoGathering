@@ -22,9 +22,11 @@ import sys
 import argparse
 import time
 from datetime import datetime
+from pathlib import Path
 from urllib.parse import urljoin, urlparse
 from concurrent.futures import ThreadPoolExecutor
 import os
+import tempfile
 import urllib3
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -75,13 +77,22 @@ class InfoGatherPro:
     def save_results(self, filename=None):
         """Save results to JSON file"""
         if not filename:
-            safe_target = (self.target or "scan_results").replace('.', '_')
-            filename = f"infogather_{safe_target}_{int(time.time())}.json"
-        
-        with open(filename, 'w') as f:
-            json.dump(self.results, f, indent=2, default=str)
-        
-        self.log(f"Results saved to {filename}")
+            safe_target = re.sub(r"[^A-Za-z0-9_.-]+", "_", self.target or "scan_results").strip("_")
+            filename = Path("reports") / f"infogather_{safe_target}_{int(time.time())}.json"
+
+        output_path = Path(filename)
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with output_path.open('w', encoding='utf-8') as f:
+                json.dump(self.results, f, indent=2, default=str)
+        except OSError as e:
+            fallback_path = Path(tempfile.gettempdir()) / output_path.name
+            self.log(f"Cannot write to {output_path}: {e}. Saving to {fallback_path} instead.", "WARNING")
+            with fallback_path.open('w', encoding='utf-8') as f:
+                json.dump(self.results, f, indent=2, default=str)
+            output_path = fallback_path
+
+        self.log(f"Results saved to {output_path}")
     
     # ============================================================
     # PASSIVE INFORMATION GATHERING METHODS
