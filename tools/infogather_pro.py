@@ -58,13 +58,17 @@ class InfoGatherPro:
     def banner(self):
         """Display tool banner"""
         banner_text = """
+==================================================================
+                   ⚠️  InfoHub Toolkit  ⚠️
+            !~  Developed by Dulanka Charidu  ~
+==================================================================          
 ╔══════════════════════════════════════════════════════════════╗
-║                    InfoGather Pro v1.0                      ║
+║                    InfoGather Pro v1.0                       ║
 ║              Comprehensive Information Gathering             ║
 ║                                                              ║
 ║  ⚠️  FOR EDUCATIONAL & AUTHORIZED TESTING ONLY ⚠️           ║
 ║                                                              ║
-║  Only use on systems you OWN or have WRITTEN PERMISSION!    ║
+║  Only use on systems you OWN or have WRITTEN PERMISSION!     ║
 ╚══════════════════════════════════════════════════════════════╝
 """
         print(banner_text)
