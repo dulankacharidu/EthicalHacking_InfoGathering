@@ -83,18 +83,18 @@ class InfoViewer:
     def print_banner(self):
         """Print colorful banner"""
         banner = f"""
-{Fore.WHITE}=====================================================================
-                          ⚠️  InfoHub Toolkit  ⚠️
-                     !~  Developed by Dulanka Charidu  ~!
- =====================================================================       
-{Fore.CYAN}╔══════════════════════════════════════════════════════════════════════╗
-                        Information Gathering Techniques                          ║
-║                          & Tools Reference                                      ║
-║                                                                                 ║
-║  {Fore.YELLOW}📋 Comprehensive Index of Ethical Hacking Techniques{Fore.CYAN}   ║
-║  {Fore.GREEN}🔍 40 Different Information Gathering Methods{Fore.CYAN}           ║
-║  {Fore.RED}⚠️  FOR EDUCATIONAL & AUTHORIZED TESTING ONLY{Fore.CYAN}             ║
-╚══════════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
+{Fore.WHITE}            =====================================================================
+{Fore.YELLOW}                                   ⚠️  InfoHub Toolkit  ⚠️
+{Fore.GREEN}                              !~  Developed by Dulanka Charidu  ~!
+            =====================================================================       
+{Fore.CYAN}            ╔══════════════════════════════════════════════════════════════════════╗
+            ║                   Information Gathering Techniques                   ║
+            ║                       & Tools Reference                              ║
+            ║                                                                      ║
+            ║  {Fore.YELLOW}📋 Comprehensive Index of Ethical Hacking Techniques{Fore.CYAN}                ║
+            ║  {Fore.GREEN}🔍 40 Different Information Gathering Methods{Fore.CYAN}                       ║
+            ║  {Fore.RED}⚠️  FOR EDUCATIONAL & AUTHORIZED TESTING ONLY{Fore.CYAN}                       ║
+            ╚══════════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """
         print(banner)
 
@@ -106,13 +106,13 @@ class InfoViewer:
 
     def print_technique_table(self, category, techniques):
         """Print formatted technique table"""
-        print(f"\n{Fore.CYAN}┌─────┬─────────────────────────────┬──────────────────────────┬────────┐")
-        print(f"│{Fore.WHITE} ID  {Fore.CYAN}│{Fore.WHITE} Technique Name              {Fore.CYAN}│{Fore.WHITE} Tools Used               {Fore.CYAN}│{Fore.WHITE} Status {Fore.CYAN}│")
-        print(f"├─────┼─────────────────────────────┼──────────────────────────┼────────┤{Style.RESET_ALL}")
+        print(f"\n{Fore.CYAN}┌─────┬─────────────────────────────┬────────────────────────────┬────────┐")
+        print(f"│{Fore.WHITE} ID  {Fore.CYAN}│{Fore.WHITE} Technique Name              {Fore.CYAN}│{Fore.WHITE} Tools Used                 {Fore.CYAN}│{Fore.WHITE} Status {Fore.CYAN}│")
+        print(f"├─────┼─────────────────────────────┼────────────────────────────┼────────┤{Style.RESET_ALL}")
         
         for tech_id, details in techniques.items():
-            name = details['name'][:27] + '...' if len(details['name']) > 27 else details['name'].ljust(27)
-            tools = details['tools'][:24] + '...' if len(details['tools']) > 24 else details['tools'].ljust(24)
+            name = details['name'][:27] + '..' if len(details['name']) > 27 else details['name'].ljust(27)
+            tools = details['tools'][:24] + '..' if len(details['tools']) > 24 else details['tools'].ljust(24)
             status = details['status']
             
             # Color coding for status
@@ -121,9 +121,9 @@ class InfoViewer:
             else:
                 status_color = Fore.YELLOW
                 
-            print(f"{Fore.CYAN}│{Fore.YELLOW} {tech_id} {Fore.CYAN}│{Fore.WHITE} {name} {Fore.CYAN}│{Fore.LIGHTBLUE_EX} {tools} {Fore.CYAN}│{status_color} {status}  {Fore.CYAN}│{Style.RESET_ALL}")
+            print(f"{Fore.CYAN}│{Fore.YELLOW} {tech_id} {Fore.CYAN}│{Fore.WHITE} {name} {Fore.CYAN}│{Fore.LIGHTBLUE_EX} {tools}   {Fore.CYAN}│{status_color} {status}      {Fore.CYAN}│{Style.RESET_ALL}")
         
-        print(f"{Fore.CYAN}└─────┴─────────────────────────────┴──────────────────────────┴────────┘{Style.RESET_ALL}")
+        print(f"{Fore.CYAN}└─────┴─────────────────────────────┴────────────────────────────┴────────┘{Style.RESET_ALL}")
 
     def print_statistics(self):
         """Print implementation statistics"""
@@ -263,8 +263,8 @@ class InfoViewer:
         self.print_quick_commands()
         self.print_usage_guide()
         
-        print(f"\n{Fore.YELLOW}⚠️  LEGAL DISCLAIMER: {Fore.WHITE}Only use these techniques on systems you own or have explicit written permission to test.#Developer: Dulanka Charidu All Rights Reseved {Style.RESET_ALL}")
-
+        print(f"\n{Fore.YELLOW}⚠️  LEGAL DISCLAIMER: {Fore.WHITE}Only use these techniques on systems you own or have explicit written permission to test. {Style.RESET_ALL}")
+        print(f"\n{Fore.YELLOW}⚠️  DEVELOPER: {Fore.WHITE}  © 2026 Dulanka Charidu. All Rights Reserved.        {Style.RESET_ALL}")
     def display_category(self, category):
         """Display specific category"""
         if category not in self.techniques:
