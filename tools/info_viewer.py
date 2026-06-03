@@ -86,7 +86,7 @@ class InfoViewer:
 {Fore.WHITE}            =====================================================================
 {Fore.YELLOW}                                   ⚠️  InfoHub Toolkit  ⚠️
 {Fore.GREEN}                              !~  Developed by Dulanka Charidu  ~!
-            =====================================================================       
+{Fore.WHITE}            =====================================================================       
 {Fore.CYAN}            ╔══════════════════════════════════════════════════════════════════════╗
             ║                   Information Gathering Techniques                   ║
             ║                       & Tools Reference                              ║
