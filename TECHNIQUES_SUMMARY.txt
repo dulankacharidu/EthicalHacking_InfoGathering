@@ -1,14 +1,18 @@
+==========================================================================
+                    ⚠️  InfoHub Toolkit  ⚠️                                                           
+             !~   Developed by Dulanka Charidu  ~!
+
 ================================================================================
-                    INFORMATION GATHERING TECHNIQUES SUMMARY
-                      Comprehensive Ethical Hacking Reference
+            #INFORMATION GATHERING TECHNIQUES SUMMARY
+             #Comprehensive Ethical Hacking Reference
 ================================================================================
 
 ⚠️  IMPORTANT LEGAL DISCLAIMER ⚠️
-This is for EDUCATIONAL PURPOSES ONLY!
-Only use on systems you OWN or have EXPLICIT WRITTEN PERMISSION to test!
+# This is for EDUCATIONAL PURPOSES ONLY!
+# Only use on systems you OWN or have EXPLICIT WRITTEN PERMISSION to test!
 
 ================================================================================
-QUICK REFERENCE INDEX
+# QUICK REFERENCE INDEX
 ================================================================================
 
 PASSIVE TECHNIQUES (6/10 implemented ✅)
@@ -182,6 +186,6 @@ LEGAL CONSIDERATIONS
 Only use these techniques on systems you own or have explicit written 
 permission to test. Unauthorized access is ILLEGAL!
 
-================================================================================
-Generated: 2025-09-19 | Ethical Hacking Course | Educational Use Only
-================================================================================
+==========================================================================================
+ Developer : Dulanka Charidu | 2025-09-19 | Ethical Hacking Course | Educational Use Only | 
+===========================================================================================
