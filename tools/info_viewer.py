@@ -83,13 +83,17 @@ class InfoViewer:
     def print_banner(self):
         """Print colorful banner"""
         banner = f"""
+{Fore.WHITE}=====================================================================
+                          ⚠️  InfoHub Toolkit  ⚠️
+                     !~  Developed by Dulanka Charidu  ~!
+ =====================================================================       
 {Fore.CYAN}╔══════════════════════════════════════════════════════════════════════╗
-║                    Information Gathering Techniques                  ║
-║                          & Tools Reference                           ║
-║                                                                      ║
-║  {Fore.YELLOW}📋 Comprehensive Index of Ethical Hacking Techniques{Fore.CYAN}          ║
-║  {Fore.GREEN}🔍 40 Different Information Gathering Methods{Fore.CYAN}                 ║
-║  {Fore.RED}⚠️  FOR EDUCATIONAL & AUTHORIZED TESTING ONLY{Fore.CYAN}                 ║
+                        Information Gathering Techniques                          ║
+║                          & Tools Reference                                      ║
+║                                                                                 ║
+║  {Fore.YELLOW}📋 Comprehensive Index of Ethical Hacking Techniques{Fore.CYAN}   ║
+║  {Fore.GREEN}🔍 40 Different Information Gathering Methods{Fore.CYAN}           ║
+║  {Fore.RED}⚠️  FOR EDUCATIONAL & AUTHORIZED TESTING ONLY{Fore.CYAN}             ║
 ╚══════════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """
         print(banner)
@@ -259,7 +263,7 @@ class InfoViewer:
         self.print_quick_commands()
         self.print_usage_guide()
         
-        print(f"\n{Fore.YELLOW}⚠️  LEGAL DISCLAIMER: {Fore.WHITE}Only use these techniques on systems you own or have explicit written permission to test.{Style.RESET_ALL}")
+        print(f"\n{Fore.YELLOW}⚠️  LEGAL DISCLAIMER: {Fore.WHITE}Only use these techniques on systems you own or have explicit written permission to test.#Developer: Dulanka Charidu All Rights Reseved {Style.RESET_ALL}")
 
     def display_category(self, category):
         """Display specific category"""
