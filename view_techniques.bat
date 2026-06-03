@@ -1,5 +1,9 @@
 @echo off
 echo =====================================
+echo ⚠️  InfoHub Toolkit  ⚠️
+echo!~  Developed by Dulanka Charidu  ~
+echo =====================================
+echo =====================================
 echo Information Gathering Techniques
 echo Viewer for Ethical Hacking Course
 echo =====================================
